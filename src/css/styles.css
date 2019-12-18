@@ -1,1 +1,65 @@
-#mapid { height: 1000px; }
+/* remove scoll */
+html { overflow-y: hidden; }
+
+#mapid { height: 1080px; }
+
+.clock-container {
+  position: absolute;
+  top: 50%;
+  right: 0%;
+  transform: translateX(0%) translateY(-30%);
+  background: #fffd;
+  text-align: center;
+  padding: 30px;
+}
+
+.clock {
+    color: #555;
+    font-size: 60px;
+    font-family: Orbitron;
+    letter-spacing: 7px;
+}
+
+.clock--date {
+    color: #777;
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 7px;
+    line-height: 30px;
+}
+/* car icon */
+.car-icon-container {
+  text-align: center;
+}
+
+.car-icon {
+  background: white;
+  border-radius: 50%;
+  border: 2px solid #555;
+  font-size: 0.7rem;
+  font-weight: bolder;
+  color: #333;
+
+}
+
+.car-icon-1A {
+  background: yellow;
+}
+.car-icon-1B {
+  background: lightblue;
+}
+.car-icon-2 {
+  background: pink;
+}
+.car-icon-3 {
+  background: red;
+  color: #ddd;
+}
+
+/* route */
+.route-1b {
+  transform: translate(8px, 8px);
+}
+
+.route-3 {
+}
