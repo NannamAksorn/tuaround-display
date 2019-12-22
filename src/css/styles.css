@@ -52,14 +52,27 @@ html { overflow-y: hidden; }
   background: pink;
 }
 .car-icon-3 {
+  background: orange;
+  color: #ddd;
+}
+.car-icon-4 {
+  background: green;
+  color: #ddd;
+}
+.car-icon-5 {
   background: red;
   color: #ddd;
 }
-
 /* route */
-.route-1b {
-  transform: translate(8px, 8px);
+.route-1a {
+  /* transform: translate(-3px, 3px); */
 }
-
+.route-1b {
+  /* transform: translate(3px, -3px); */
+}
 .route-3 {
+  /* transform: translate(0px, 0px); */
+}
+.route-5 {
+  /* transform: translate(10px, -6px); */
 }
