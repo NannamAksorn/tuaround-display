@@ -4,9 +4,10 @@
   "eslint.validate": [ 
     { "language": "javascript", "autoFix": true},
     { "language": "html", "autoFix": true},
-    { "language": "css", "autoFix": true},
+    // { "language": "css", "autoFix": true},
    ],
    "eslint.options": {
-     "extensions": [".js", ".html", ".css"]
-   }
+    "extensions": [".js", ".html"]
+  },
+  "eslint.enable": true
 }

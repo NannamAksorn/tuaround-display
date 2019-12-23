@@ -2,6 +2,7 @@
 html { 
   overflow-y: hidden;
  }
+
 /* top */
 .header {
   background-color: maroon;
@@ -39,7 +40,7 @@ html {
 
 /* clock */
 .clock-container {
-  position: absolute;
+  /* position: absolute; */
   /* background: #3331; */
   text-align: center;
   margin: 20px;
@@ -59,6 +60,14 @@ html {
     font-weight: bold;
     letter-spacing: 7px;
     line-height: 30px;
+}
+/* time controller */
+.timeControllerContainer {
+    color:white;
+    padding: 50px;
+    font-size: 24px;
+    text-align: right;
+    font-family: Orbitron;
 }
 
 /* bottom */
