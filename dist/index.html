@@ -9,18 +9,32 @@
     <title>Tu Around</title>
   </head>
   <body>
+    <div id="mapid"></div>
+    <!--header  -->
      <div class="fixed-top">
-       <!-- Clock -->
-       <div class="shadow p-3 mb-5 rounded">
-         <div class="clock-container" onload="showTime()">
-          <div id="MyClockDisplay" class="clock"></div>
-          <div id="MyClockDisplay--date" class="clock--date">hello</div>
+       <div class="header shadow">
+         <div class="title-container">
+          <img class="tu-logo" src="public/tu-logo.png" alt="tu-logo" width="110">
+          <h2>Thammasat University Transportation</h2>
          </div>
        </div>
      </div>
-     <div class="fixed-bottom">     
-       <div class="shadow p-3 mb-5 rounded">Float left on all viewport sizes</div>
+
+     <!-- info -->
+     <div class="fixed-right shadow">
+       <div class="info-container">
+        <!-- clock -->
+        <div class="clock-container" onload="showTime()">
+          <div id="MyClockDisplay" class="clock"></div>
+          <div id="MyClockDisplay--date" class="clock--date">clock</div>
+        </div>
+        <!--  -->
+      </div>
      </div>
-   <div id="mapid"></div>
+
+  <!-- footer -->
+     <div class="fixed-bottom">
+       <div class="footer shadow">@Copyright 2019 TU Around. All Rights Reserved.</div>
+     </div>
   </body>
 </html>

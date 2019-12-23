@@ -1,31 +1,81 @@
 /* remove scoll */
-html { overflow-y: hidden; }
+html { 
+  overflow-y: hidden;
+ }
+/* top */
+.header {
+  background-color: maroon;
+  color: white;
+  height: 120px;
+}
+.title-container {
+  padding: 8px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-family: Georgia, serif;
+  font-weight: bolder;
+}
 
-#mapid { height: 1080px; }
+.tu-logo{
+  padding-right: 15px;
+}
 
+/* right */
+.fixed-right {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 1030;
+  background-color: maroon;
+  width: 400px;
+}
+
+.info-container {
+  /* transform: translateX(300%); */
+  /* height: 100vh; */
+}
+
+/* clock */
 .clock-container {
   position: absolute;
-  top: 50%;
-  right: 0%;
-  transform: translateX(0%) translateY(-30%);
-  background: #fffd;
+  /* background: #3331; */
   text-align: center;
-  padding: 30px;
+  margin: 20px;
+  width: 100%;
 }
 
 .clock {
-    color: #555;
-    font-size: 60px;
+    color: #ddd;
+    font-size: 50px;
     font-family: Orbitron;
     letter-spacing: 7px;
 }
 
 .clock--date {
-    color: #777;
+    color: #999;
     font-size: 24px;
     font-weight: bold;
     letter-spacing: 7px;
     line-height: 30px;
+}
+
+/* bottom */
+.footer {
+  padding-top: 10px;
+  text-align: center;
+  background-color: maroon;
+  color: white;
+  height: 54px;
+}
+
+#mapid { 
+  height: 1200px; 
+}
+
+.leaflet-tile-pane {
+  /* filter: invert(1); */
 }
 /* car icon */
 .car-icon-container {
@@ -75,4 +125,8 @@ html { overflow-y: hidden; }
 }
 .route-5 {
   /* transform: translate(10px, -6px); */
+}
+
+/* TU model overlay */
+.tu-model-overlay {
 }

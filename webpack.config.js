@@ -1,6 +1,6 @@
-const CompressionPlugin = require('compression-webpack-plugin')
+const CompressionPlugin = require('compression-webpack-plugin');
 // webpack.config.js
-const path = require('path')
+const path = require('path');
 
 module.exports = {
   devtool: '',
@@ -8,7 +8,7 @@ module.exports = {
     './src/index.js',
   ],
   output: {
-    path: path.resolve(__dirname, "dist"),
+    path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
     filename: 'bundle.js'
   },
@@ -18,18 +18,18 @@ module.exports = {
       {
         test: /\.js$/,
         include: [
-          path.resolve(__dirname, "src/js")
+          path.resolve(__dirname, 'src/js')
         ],
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader"
+          loader: 'babel-loader'
         }
       },
       // css
       {
         test: /\.css$/,
         include: [
-          path.resolve(__dirname, "src/css")
+          path.resolve(__dirname, 'src/css')
         ],
         exclude: /node_modules/,
         use: [
@@ -39,12 +39,15 @@ module.exports = {
       },
       // css for node_modules
       { test: /\.css$/,
-        loader: "style-loader!css-loader",
+        loader: 'style-loader!css-loader',
         exclude: path.resolve(__dirname, 'src/css')
 
       },
       {
         test: /\.(png|svg|jpg|gif)$/,
+        // include: [
+        //   path.resolve(__dirname, 'public')
+        // ],
         use: [{
             loader: 'file-loader',
             options: {
