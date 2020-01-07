@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <link rel='shortcut icon' type='image/x-icon' href='public/favicon.ico' />
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=2, shrink-to-fit=no">
+  <script type="module" src="/bundle.js"></script>
+
+  <title>TU Around</title>
+</head>
+
+<body>
+  <div id="mapid"></div>
+  <!--header  -->
+  <div class="fixed-top">
+    <div class="header shadow">
+      <div class="title-container">
+        <img class="tu-logo ml-3" src="public/tu-logo.png" alt="tu-logo" width="84">
+        <h3>Thammasat University Transportation</h3>
+      </div>
+    </div>
+  </div>
+
+  <!-- info -->
+  <div class="fixed-right shadow">
+    <div class="info-container">
+      <!-- clock -->
+      <div class="clock-container" onload="showTime()">
+        <div id="MyClockDisplay--date" class="clock--date">clock</div>
+        <div id="MyClockDisplay" class="clock"></div>
+      </div>
+      <!-- Weather -->
+      <div class="weather-container">
+        <div id="MyWeatherIcon"></div>
+        <div class="weather-info--container">
+          <!-- temp -->
+          <div class="d-flex flex-row">
+            <img class="mr-4" src="public/weather/icon/temp.svg" alt="temp" width="30px">
+            <div id="MyWeatherTemp" class="weather--temp">30°C</div>
+          </div>
+          <!-- rain -->
+          <div class="d-flex flex-row">
+            <img class="mr-4" src="public/weather/icon/raining.svg" alt="raining" width="30px">
+            <div id="MyWeatherPrecip" class="weather--temp">0%</div>
+          </div>
+        </div>
+      </div>
+      <!-- Arrival Prediction -->
+      <div class="arrival_prediction">
+        <!-- forward -->
+        <h5>Forward:</h5>
+        <div id="forwardPrediction"></div>
+        <h5>Backward:</h5>
+        <div id="backwardPrediction"></div>
+      </div>
+
+      <!-- time range -->
+      <div class="timeControllerContainer">
+        <b>Dev Time: </b>
+        <span id="timeControllerText">16:00</span>
+        <input type="range" class="form-control-range" min="1" max="240" value="40" id="timeControllerRange">
+      </div>
+
+    </div>
+  </div>
+
+  <!-- footer -->
+  <div class="fixed-bottom">
+    <div class="footer shadow">@Copyright 2019 TU Around. All Rights Reserved.</div>
+  </div>
+</body>
+
+</html>

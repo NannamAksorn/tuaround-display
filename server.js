@@ -1,19 +1,18 @@
 // server.js
 const expressStaticGzip = require('express-static-gzip');
 const express = require('express');
-// const favicon = require('express-favicon');
+const favicon = require('express-favicon');
 const path = require('path');
+const axios = require('axios');
 
-
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 8081;
 
 const app = express();
 
-// app.use(favicon(__dirname + '/public/favicon.png'));
 
 // the __dirname is the current directory from where the script is running
-
 app.use(express.static(__dirname));// send the user to index html page inspite of the url
+
 
 app.use('/', expressStaticGzip(path.resolve(__dirname, 'dist'), {
   enableBrotli: true,
@@ -24,9 +23,20 @@ app.use('/', expressStaticGzip(path.resolve(__dirname, 'dist'), {
 
 }));
 
+app.use(favicon(__dirname + '/public/favicon.png'));
 
-app.get('*', (req, res) => {
+
+app.get('/', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'index.html'));
 });
+
+// weather
+app.get('/api/weather', (req, res) => {
+  const WEATHER_API = `https://api.darksky.net/forecast/56d11b10e025f7cd93cc31496fba4cb6/14.0717,%20100.60205?units=si`
+  axios.get(WEATHER_API)
+    .then(weatherRes => { res.json(weatherRes.data)})
+    .catch(err => res.send(err))
+
+})
 
 app.listen(port);

@@ -1,7 +1,11 @@
 import io from 'socket.io-client';
 
-const socket = io('https://service.mappico.co.th');
+// const socket = io('https://service.mappico.co.th');
+const socket = io();
 
-socket.emit('room', 'THAMMATRANS');
-const ngvListener = (callback) => socket.on('TU-NGV', callback);
-export default ngvListener;
+// socket.emit('room', 'THAMMATRANS');
+// socket.emit('room', 'NGV');
+export const ngvListener = (callback) => socket.on('TU-NGV', callback);
+export const iconAddListener = (callback) => socket.on('ICON_ADD', callback);
+export const forwardArrivalListener = (callback) => socket.on('P_4', callback);
+export const backwardArrivalListener = (callback) => socket.on('P_4A', callback);

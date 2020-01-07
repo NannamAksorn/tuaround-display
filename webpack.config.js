@@ -1,8 +1,27 @@
-const CompressionPlugin = require('compression-webpack-plugin');
 // webpack.config.js
+const CompressionPlugin = require('compression-webpack-plugin');
 const path = require('path');
 
 module.exports = {
+  devServer:{
+    proxy:{
+      '/api': {
+        target: {
+          host: "0.0.0.0",
+          protocol: 'http',
+          port: 8081
+        },
+        pathRewriite: {
+          '^/api':  ''
+        }
+      },
+      '/socket.io': {
+        target: 'ws://localhost:3000',
+        ws: true
+      }
+    },
+    contentBase: path.join(__dirname, 'dist'),
+  },
   devtool: '',
   entry: [
     './src/index.js',
@@ -10,10 +29,17 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    pathinfo: false,
   },
+  watch: true,
   module: {
     rules: [
+      // html
+      {
+        test: /\.html$/,
+        loader: "raw-loader"
+      },
       // js
       {
         test: /\.js$/,
@@ -28,21 +54,17 @@ module.exports = {
       // css
       {
         test: /\.css$/,
-        include: [
-          path.resolve(__dirname, 'src/css')
-        ],
-        exclude: /node_modules/,
         use: [
           'style-loader',
           'css-loader'
         ]
       },
       // css for node_modules
-      { test: /\.css$/,
-        loader: 'style-loader!css-loader',
-        exclude: path.resolve(__dirname, 'src/css')
+      // { test: /\.css$/,
+      //   loader: 'style-loader!css-loader',
+      //   // exclude: path.resolve(__dirname, 'src/css')
 
-      },
+      // },
       {
         test: /\.(png|svg|jpg|gif)$/,
         // include: [
@@ -60,21 +82,26 @@ module.exports = {
   resolve: {
     modules: ['node_modules']
   },
+  optimization: {
+    removeAvailableModules: false,
+    removeEmptyChunks: false,
+    splitChunks: false,
+  },
   plugins: [
-    new CompressionPlugin({
-      filename: '[path].gz[query]',
-      algorithm: 'gzip',
-      test: /\.js$|\.css$|\.html$/,
-      threshold: 10240,
-      minRatio: 0.8,
-    }),
-    new CompressionPlugin({
-      filename: '[path].br[query]',
-      algorithm: 'brotliCompress',
-      test: /\.(js|css|html|svg)$/,
-      compressionOptions: { level: 11 },
-      threshold: 10240,
-      minRatio: 0.8,
-    }),
+  //   new CompressionPlugin({
+  //     filename: '[path].gz[query]',
+  //     algorithm: 'gzip',
+  //     test: /\.js$|\.css$|\.html$/,
+  //     threshold: 10240,
+  //     minRatio: 0.8,
+  //   }),
+  //   new CompressionPlugin({
+  //     filename: '[path].br[query]',
+  //     algorithm: 'brotliCompress',
+  //     test: /\.(js|css|html|svg)$/,
+  //     compressionOptions: { level: 11 },
+  //     threshold: 10240,
+  //     minRatio: 0.8,
+  //   }),
   ],
 };
