@@ -1,17 +1,12 @@
 /* eslint-disable no-extend-native */
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
-import {ngvListener, iconAddListener, forwardArrivalListener, backwardArrivalListener  } from './socket';
+import {ngvListener, iconAddListener, forwardArrivalListener } from './socket';
 import 'leaflet-polylineoffset';
 import routeData from './route-data';
 import iconFactory from './iconFactory'
 
-// right
-// const INIT_LOCATION = [14.0717, 100.60855];
-// left
-// const INIT_LOCATION = [14.0717, 100.60205];
-// full
-const INIT_LOCATION = [14.07198, 100.60256];
+const INIT_LOCATION = [14.0722, 100.6035];
 
 const map = L.map('mapid',
   {
@@ -22,21 +17,21 @@ const map = L.map('mapid',
     zoomSnap: 0.01,
   });
 // map.setView(INIT_LOCATION, 16.4);
-map.setView(INIT_LOCATION, 16.45);
+map.setView(INIT_LOCATION, 16.5);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 }).addTo(map);
 
 // model overlay
-const bottomLeft = [14.0799, 100.59287];
-const topRight = [14.0649, 100.61767];
+const bottomLeft = [14.06453, 100.588749];
+const topRight = [14.080178, 100.620275];
 
-let imageUrl = '/public/tu-model/tu-model-0040.jpg';
+let imageUrl = '/public/tu-model/tu-model-0009.jpg';
 const imageBounds = [bottomLeft, topRight];
 const imageOverlay = L.imageOverlay(imageUrl, imageBounds, {
   zIndex: 5,
-  opacity:.8,
+  opacity: .89,
   className: 'myoverlay',
 });
 imageOverlay.addTo(map);
@@ -115,7 +110,7 @@ const createIcon = (carno, direction, route=3) => {
   const carHtml = `
   <div id="car-${carno}" class="d-flex flex-column align-items-center">
     <div id="arrow-${carno}" class="arrow-up arrow-${route}" style='transform:rotate(${direction}deg);'></div>
-    <div class="car-icon car-icon-${route}">${no}</div>
+    <div id="car-icon-${carno}" class="car-icon">${no}</div>
   </div>`;
   const myIcon = L.divIcon({
     className: 'car-icon-container',
@@ -141,6 +136,17 @@ ngvListener((data) => {
       cars[car.i].marker.setLatLng([car.a, car.o]);
       const arrowEl = document.getElementById(`arrow-${car.i}`)
       arrowEl.style.transform = `rotate(${car.d}deg)`
+      const carIconEl = document.getElementById(`car-icon-${car.i}`)
+      if (car.s == "st")  {
+        arrowEl.className = `arrow-up arrow-error`
+        carIconEl.style.background = `var(--ngv-error-color)`
+        carIconEl.style.transform = `scale(.8)`
+      } else {
+        arrowEl.className = `arrow-up arrow-${car.r}`
+        carIconEl.style.background = `var(--ngv-${car.r}-color)`
+        carIconEl.style.color = `var(--ngv-${car.r}-text-color)`
+        carIconEl.style.transform = `scale(1)`
+      }
     }
   }
   // if (!(data.carno in cars)) {
@@ -159,24 +165,33 @@ ngvListener((data) => {
 });
 // ======================================================================     Prediction
 forwardArrivalListener((data) => {
-  // data = JSON.parse(data)
+  data = JSON.parse(data)
   const fpEL= document.getElementById('forwardPrediction')
-  fpEL.innerText = data
+  let html = ''
+  for (let rid in data){
+    let {i, t} = data[rid]
+    if (t < 60){
+      html +=`
+          <div class="estimate--card">
+            <div class="d-flex align-items-center">
+              <span class="estimate--badge car-icon-${rid}">${i}</span>
+              <span class="pl-3">สาย ${rid}</span>
+            </div>
+            <div class="estimate--time">
+              ${t} นาที
+            </div>
+          </div>
+          `
+    }
+  }
+  fpEL.innerHTML = html
 });
-
-backwardArrivalListener((data) => {
-  // data = JSON.parse(data)
-  const bwEL= document.getElementById('backwardPrediction')
-  bwEL.innerText = data
-});
-
-
 
 // stop marker layer
 // let stopMarker = L.marker([14.06601, 100.60054])
 // stopMarker.addTo(map)
 // __________________________________________________________________________________STOP_LAYER___________
-let stopUrl = '/public/stop/stops.png';
+let stopUrl = '/public/stop/stop_v2.png';
 const stopOverlay = L.imageOverlay(stopUrl, imageBounds, {
   zIndex: 5,
   // className: 'myoverlay',
@@ -191,49 +206,16 @@ const stationOverlay = L.imageOverlay(stationUrl, imageBounds, {
   zIndex: 5,
   // className: 'myoverlay',
 });
-stationOverlay.addTo(map);
+// stationOverlay.addTo(map);
 stationOverlay.bringToFront();
 
 // __________________________________________________________________________________etc
-// let myIconHtml = `
-// <div id="i1"></div>`;
-// let myIcon = L.divIcon({
-//   className: 'car-icon-container',
-//   html: myIconHtml,
-//   iconSize: L.point(50, 50),
-// });
-// let marker = L.marker([14.07338, 100.60114], { icon: myIcon });
-// marker.addTo(map)
-
-// lottie.loadAnimation({
-//     container: document.getElementById(`i1`),
-//     renderer: 'svg',
-//     loop: true,
-//     autoplay: true,
-//     path: `public/etc/food.json`,
-//     rendererSetting: {
-//       clearCanvas: true35
-//     }
-// })
-
-let myIcon = new iconFactory('lottie', {
-  id:1, lat:14.0736, lon:100.60114, width:25, height:25, src:"@food.json"
-})
-// myIcon.marker.addTo(map)
-// myIcon.render()
-
-// myIcon = new iconFactory('text', {
-//   id:1, lat:14.0735, lon:100.60114, width:100, height:25, text:"Green"
-// })
-// myIcon.marker.addTo(map)
-
-// myIcon = new iconFactory('image', {
-//   id:1, lat:14.07335, lon:100.60114, width:20, height:20, src:"@spoon_fork.svg"
-// })
-// myIcon.marker.addTo(map)
 let myIconList = {}
 iconAddListener(({type, props}) => {
-  myIcon = new iconFactory(type, props)
+  if (props.id in myIconList){
+    map.removeLayer(myIconList[props.id])
+  }
+  let myIcon = new iconFactory(type, props)
   myIcon.marker.addTo(map)
   if (type === "lottie")
     myIcon.render()

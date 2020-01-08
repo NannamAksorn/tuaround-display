@@ -1,18 +1,39 @@
 /* remove scoll */
+:root {
+  --tu-red-color: #C3002F;
+  --float-container-color: #5779;
+  --info-text-color: white;
+  /* NGV */
+  --ngv-1a-color: yellow;
+  --ngv-1b-color: lightblue;
+  --ngv-2-color: pink;
+  --ngv-3-color: orange;
+  --ngv-4-color: green;
+  --ngv-5-color: red;
+  --ngv-1a-text-color: black;
+  --ngv-1b-text-color: black;
+  --ngv-2-text-color: black;
+  --ngv-3-text-color: black;
+  --ngv-4-text-color: white;
+  --ngv-5-text-color: white;
+  --ngv-error-color: #555a;
+}
+
 html { 
   overflow-y: hidden;
  }
 
 /* top */
 .header {
-  background-color: #800;
+  background-color: var(--tu-red-color);
   color: white;
   height: 80px;
+  display: flex;
+  flex-direction: row;
 }
 .title-container {
   padding: 8px;
   display: flex;
-  flex-direction: row-reverse;
   align-items: center;
   font-family: Georgia, serif;
   font-weight: bolder;
@@ -22,72 +43,65 @@ html {
   padding-right: 15px;
 }
 
-/* right */
-.fixed-right {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 1030;
-  background-color: #800;
-  width: 18%;
-}
-
-.info-container {
-  /* transform: translateX(300%); */
-  /* height: 100vh; */
+/* right section */
+.right-section {
+  margin-left: auto;
+  display: flex;
+  flex-direction: row;
 }
 
 /* clock */
 .clock-container {
   /* position: absolute; */
   /* background: #3331; */
-  text-align: center;
-  margin-top: 30px;
-  width: 100%;
+  /* text-align: center; */
+  padding: 10px;
+  margin-top: 5px;
+  margin-right: 20px;
+  /* margin-top: 30px; */
+  /* width: 100%; */
 }
 
 .clock {
     color: #ddd;
-    font-size: 50px;
+    font-size: 35px;
     font-family: Orbitron;
-    letter-spacing: 7px;
+    letter-spacing: 8px;
 }
 
 .clock--date {
-    color: #999;
-    font-size: 24px;
+    color: #aaa;
+    font-size: 20px;
     font-weight: bold;
-    letter-spacing: 7px;
-    line-height: 30px;
+    letter-spacing: 1.5px;
+    line-height: 15px;
 }
 
 /* weather */
 .weather-container {
-  margin-left: 90px;
-  width: 100%;
-  height: 100px;
   display:flex;
   flex-direction: row;
+  margin-right: 20px;
 }
 
 .weather-info--container {
   flex: 2;
+  margin-top: 10px;
   flex-direction: column;
   color: #ddd;
-  margin-top: 10px;
   justify-content: space-around;
 }
 
 #MyWeatherIcon {
-  width: 100px;
+  margin-right: 10px;
+  width: 60px;
 }
 
 .weather--temp {
   font-weight: bold;
-  font-size: 25px;
+  font-size: 20px;
   font-family: Orbitron;
-  letter-spacing: 7px;
+  letter-spacing: 3px;
 }
 
 /* time controller */
@@ -99,12 +113,60 @@ html {
     font-family: Orbitron;
 }
 
+/* info section left */
+.float-left {
+  color: var(--info-text-color);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  position: fixed;
+  top: 40%;
+  /* bottom: 0; */
+  left: 3%;
+  z-index: 1030;
+  background-color: var(--float-container-color);
+  width: 18%;
+  height: 50%; 
+}
+
+.station-container {
+  text-align: center;
+  margin: 10%;
+}
+
+/* info section top */
+.float-top {
+  color: var(--info-text-color);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  position: fixed;
+  top: 10%;
+  /* bottom: 0; */
+  left: 85%;
+  z-index: 1030;
+  background-color: var(--float-container-color);
+  width: 10%;
+  height: 20%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.qrcode-container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  /* margin-right: 2%; */
+}
+.qrcode-container label {
+  font-size: 1.3rem;
+  font-family: monospace;
+  letter-spacing: 3px;
+}
+
 /* bottom */
 .footer {
-  padding-right: 3%;
-  text-align: right;
-  background-color: maroon;
-  color: white;
+  /* padding-left: 3%; */
+  text-align: center;
+  /* background-color: maroon; */
+  color:#555;
   height: 25px;
   font-size: 13px;
 }
@@ -152,6 +214,8 @@ html {
 .arrow-3::before { border-bottom-color:  orange; }
 .arrow-4::before { border-bottom-color:  green; }
 .arrow-5::before { border-bottom-color:  red; }
+.arrow-error::before { border-bottom-color:  transparent; }
+.arrow-error { border-bottom-color:  transparent; }
 
 .car-icon-container {
   text-align: center;
@@ -198,7 +262,35 @@ html {
 }
 /* Arrival Prediction */
 .arrival_prediction {
-  color: white;
+  margin: 5% 10%;
+  display: flex;
+  flex-direction: column;
+  /* color: white; */
+}
+.arrival_prediction h5{
+  line-height: 20px;
+}
+
+.estimate--card {
+  display: flex;
+  justify-content: space-between;
+  background: #6655;
+  margin-top: 2%;
+  align-items: center;
+  text-align: center;
+  /* font-weight: bold; */
+}
+
+.estimate--badge {
+  padding: 5px;
+  font-size: 1.5rem;
+}
+
+.estimate--time {
+  margin-right: 8%;
+  align-items: center;
+  line-height: 1px;
+  font-size: 1.2rem;
 }
 
 /* route */

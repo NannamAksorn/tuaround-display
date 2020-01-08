@@ -12,59 +12,75 @@
 </head>
 
 <body>
+  <!-- map -->
   <div id="mapid"></div>
   <!--header  -->
-  <div class="fixed-top">
+  <section class="fixed-top">
     <div class="header shadow">
       <div class="title-container">
         <img class="tu-logo ml-3" src="public/tu-logo.png" alt="tu-logo" width="84">
         <h3>Thammasat University Transportation</h3>
       </div>
-    </div>
-  </div>
-
-  <!-- info -->
-  <div class="fixed-right shadow">
-    <div class="info-container">
-      <!-- clock -->
-      <div class="clock-container" onload="showTime()">
-        <div id="MyClockDisplay--date" class="clock--date">clock</div>
-        <div id="MyClockDisplay" class="clock"></div>
-      </div>
-      <!-- Weather -->
-      <div class="weather-container">
-        <div id="MyWeatherIcon"></div>
-        <div class="weather-info--container">
-          <!-- temp -->
-          <div class="d-flex flex-row">
-            <img class="mr-4" src="public/weather/icon/temp.svg" alt="temp" width="30px">
-            <div id="MyWeatherTemp" class="weather--temp">30°C</div>
-          </div>
-          <!-- rain -->
-          <div class="d-flex flex-row">
-            <img class="mr-4" src="public/weather/icon/raining.svg" alt="raining" width="30px">
-            <div id="MyWeatherPrecip" class="weather--temp">0%</div>
+      <!-- right section -->
+      <section class="right-section">
+        <!-- clock -->
+        <div class="clock-container" onload="showTime()">
+          <div id="MyClockDisplay--date" class="clock--date">clock</div>
+          <div id="MyClockDisplay" class="clock"></div>
+        </section>
+        <!-- Weather -->
+        <div class="weather-container">
+          <div id="MyWeatherIcon"></div>
+          <div class="weather-info--container">
+            <!-- temp -->
+            <div class="d-flex flex-row">
+              <img class="mr-4" src="public/weather/icon/temp.svg" alt="temp" width="25px">
+              <div id="MyWeatherTemp" class="weather--temp">30°C</div>
+            </div>
+            <!-- rain -->
+            <div class="d-flex flex-row">
+              <img class="mr-4" src="public/weather/icon/raining.svg" alt="raining" width="25px">
+              <div id="MyWeatherPrecip" class="weather--temp">0%</div>
+            </div>
           </div>
         </div>
-      </div>
-      <!-- Arrival Prediction -->
-      <div class="arrival_prediction">
-        <!-- forward -->
-        <h5>Forward:</h5>
-        <div id="forwardPrediction"></div>
-        <h5>Backward:</h5>
-        <div id="backwardPrediction"></div>
-      </div>
+      </section>
+    </div>
+  </section>
 
+  <!-- info section left -->
+  <section class="float-left shadow rounded ">
+    <!-- station -->
+    <div class="station-container">
+      <h3>หน้าโรงอาหารกรีน</h3>
+      <h3>Green Canteen</h3>
+    </div>
+    <hr>
+    <!-- Arrival Prediction -->
+    <div class="arrival_prediction">
+      <!-- forward -->
+      <h5>ประมาณเวลาที่รถจะมาถีง</h5>
+      <h5>Estimate Arrival Time</h5>
+      <div id="forwardPrediction">
+      </div>
+    </div>
+
+  </section>
+
+  <!-- info section top -->
+  <section class="float-top shadow rounded ">
       <!-- time range -->
-      <div class="timeControllerContainer">
+      <div class="timeControllerContainer d-none">
         <b>Dev Time: </b>
         <span id="timeControllerText">16:00</span>
         <input type="range" class="form-control-range" min="1" max="240" value="40" id="timeControllerRange">
       </div>
-
-    </div>
-  </div>
+      <!-- qrcode -->
+      <div class="qrcode-container">
+        <label>ข้อมูลเพิ่มเติม</label>
+        <img src="public/qrcode.png" alt="qrcode" width="150" />
+      </div>
+  </section>
 
   <!-- footer -->
   <div class="fixed-bottom">
