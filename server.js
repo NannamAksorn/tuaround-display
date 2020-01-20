@@ -38,5 +38,5 @@ app.get('/api/weather', (req, res) => {
     .catch(err => res.send(err))
 
 })
-
+console.log('listening on ' + port)
 app.listen(port);
