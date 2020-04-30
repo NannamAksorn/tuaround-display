@@ -21,7 +21,7 @@
     "express": "^4.17.1",
     "express-favicon": "^2.0.1",
     "express-static-gzip": "^2.0.5",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "leaflet": "^1.6.0",
     "leaflet-polylineoffset": "^1.1.1",
     "lottie-web": "^5.5.10",
